@@ -1,39 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 
-class Board extends React.Component {
-  constructor() {
-    super();
+function Board() {
+  let tiles = [{ id: 0, col: 0, row: 0, type: true }];
+  let col = 0;
+  let row = 0;
+  for (let i = 1; i < 16; i++) {
+    col++;
+
+    if (i % 4 === 0) {
+      col = 0;
+      row++;
+    }
+    tiles.push({ id: i, col: col, row: row });
   }
-  render() {
-    return (
-      <div>
-        <div className="row mx-auto mt-3" id="boardrow">
-          <div className="col col-3 border border-secondary">0 </div>
-          <div className="col col-3 border border-secondary">1 </div>
-          <div className="col col-3 border border-secondary">2</div>
-          <div className="col col-3 border border-secondary">3</div>
-        </div>
-        <div className="row mx-auto" id="boardrow">
-          <div className="col col-3 border border-secondary">4</div>
-          <div className="col col-3 border border-secondary">5</div>
-          <div className="col col-3 border border-secondary">6</div>
-          <div className="col col-3 border border-secondary">7</div>
-        </div>
-        <div className="row mx-auto" id="boardrow">
-          <div className="col col-3 border border-secondary">8</div>
-          <div className="col col-3 border border-secondary">9</div>
-          <div className="col col-3 border border-secondary">10</div>
-          <div className="col col-3 border border-secondary">11</div>
-        </div>
-        <div className="row mx-auto" id="boardrow">
-          <div className="col col-3 border border-secondary">12</div>
-          <div className="col col-3 border border-secondary">13</div>
-          <div className="col col-3 border border-secondary">14</div>
-          <div className="col col-3 border border-secondary">15</div>
-        </div>
-      </div>
-    );
+  console.log(tiles);
+  // const[tile,setTile] = useState()
+
+  function moveTile(obj) {
+    if (
+      obj.col === tiles[0].col &&
+      (obj.row === tiles[0].row + 1 || obj.row === tiles[0].row - 1)
+    ) {
+      alert("this tile is in the same col");
+    } else if (
+      obj.row === tiles[0].row &&
+      (obj.col === tiles[0].col + 1 || obj.col === tiles[0].col - 1)
+    ) {
+      alert("this tile is in the same row!");
+    }
+    else{
+      alert("this tile cannot be moved")
+    }
   }
+  //       if (clicked === true)
+  // find coordinates of clicked object and coordinates of blank object
+  //  else alert (this tile cannot be moved!)
+  //
+
+  return (
+    <div className="row">
+      {tiles.map((obj, index) => {
+        return (
+          <div
+            className="col col-3 border border-secondary"
+            onClick={() => moveTile(obj)}
+          >
+            {obj.id}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 export default Board;
+
+//   didClick() {
+
+// //   this.setState({
+//     id: index,
+//     type: regular,
+//     location: currentIndex,
+//     clicked = true,
+// })
+//
+//   }

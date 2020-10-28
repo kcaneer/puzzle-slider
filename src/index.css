@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-#boardrow {
+.col {
   height: 200px;
 }

@@ -6,7 +6,7 @@ class Buttons extends React.Component {
   }
   render() {
     return (
-      <div className="row pb-3">
+      <div className="row">
         <div className="col col-6 mx-auto">
           <button className="btn btn-info" type="button" id="import">
             Import Photo

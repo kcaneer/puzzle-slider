@@ -16,11 +16,11 @@
     -Use an array of objects (16 objects numbered 0-15) 
     beginning = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
     tiles = []; (copy of beginnign that is shuffled)
-        ID = initial array index
-        type = blank or regular
-        location = current index
+        ID = initial array index, never changes
+        type = blank or regular, never changes
+        location = current index where the object sits
         clicked = false (add event listener to change this to true)
-            if indexOf clicked === 0 && blank tile is in index 1 or 3 change to true
+            if indexOf clicked === 0 && blank tile is in index 1 or 4 change to true
         indexOf(clicked) : indexOf(getelementbyID('blank))
             0: [1,4]
             1: [0, 2, 5]
@@ -40,6 +40,14 @@
             15: [11,14]
 
             else alert (this tile cannot be moved!)
+
+    - moveTile(){
+        this.state.row = row of blank
+        this.state.col = col of blank
+        blank col = clicked col
+        blank row = clicked row
+    }
+
     - button to shuffle
         for(let i = array.length — 1; i > 0; i--){
         const j = Math.floor(Math.random() * i)
@@ -52,3 +60,67 @@
         alert(You Won!)
         
 
+<!-- Ian  11:24 AM
+3 ways to map and make a grid
+move the export default to the function you wanna test out
+import React from 'react'
+function Grid() {
+  let arr = Array(16).fill().map((x, i) => i)
+  let grid = []
+  let subArr = []
+  for (let j = 0; j < arr.length; j++) {
+    let col = <div className='col'>{j}</div>
+    subArr.push(col)
+    if ((j + 1) % 4 === 0) {
+      console.log("in if")
+      let row = <div className='row'>{subArr}</div>
+      grid.push(row)
+      subArr = []
+    }
+  }
+  console.log(grid, subArr)
+  return (
+    <div className='container'>
+      {grid}
+    </div>
+  )
+}
+function GridUsingMap() {
+  let arr = Array(16).fill().map((x, i) => i)
+  let grid = arr.map((y, j) => {
+    return (
+      (j + 1) % 4 === 0 &&
+      <div className='row'>
+        {arr.slice(j + 1 - 4, j + 1).map((x, i) => (
+          <div className='col'>
+            {/* inner for loop */}
+            {x}
+          </div>
+        ))}
+      </div>
+    )
+  })
+  console.log(grid)
+  return (
+    <div className='container'>
+      {grid}
+    </div>
+  )
+}
+export default function GridWithRows() {
+  return (
+    <div className='container'>
+      {/* outer for loop */}
+      {Array(4).fill().map((y, j) => (
+        <div className='row'>
+          {Array(4).fill().map((x, i) => (
+            <div className='col'>
+              {/* inner for loop */}
+              {(4 * (j + 1)) - (4 - i)}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+} -->
