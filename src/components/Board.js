@@ -103,7 +103,7 @@ function Board() {
         className="col boardcol col-3 border border-secondary"
         onClick={() => moveTile(obj, index)}
       >
-        {obj}
+        {obj.id}
       </div>
     );
   });
