@@ -117,8 +117,12 @@ function Board() {
       </div>
     );
   });
-  console.log({ mapped });
-  return <div className="row">{mapped}</div>;
+
+  return (
+      <div className="row">
+        {mapped}
+      </div>
+  );
 }
 
 export default Board;
