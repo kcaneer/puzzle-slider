@@ -20,32 +20,42 @@ function Board() {
   function moveTile(obj, index) {
     let newTiles = tiles;
     let temp;
+    let zero;
+    for (let i = 0; i < tiles.length; i++){
+      if (tiles[i].id === 0){
+         zero = i
+      }
+    }
     if (
-      obj.col === tiles[0].col &&
-      (obj.row === tiles[0].row + 1 || obj.row === tiles[0].row - 1)
+      obj.col === tiles[zero].col &&
+      (obj.row === tiles[zero].row + 1 || obj.row === tiles[zero].row - 1)
     ) {
       temp = tiles[index].row;
       // alert("this tile is in the same col");
-      newTiles[index].row = tiles[0].row;
-      newTiles[0].row = temp;
+      newTiles[index].row = tiles[zero].row;
+      console.log(tiles)
+      newTiles[zero].row = temp;
       // setTiles(newTiles);
-      setTiles(newTiles);
+       let temp2 = newTiles[index];
+       newTiles[index] = tiles[zero];
+       newTiles[zero] = temp2;
+      setTiles([...tiles]);
       // setTiles(tiles.row === tiles[0].row && make tiles[0].row === thistiles.row)
     } else if (
-      obj.row === tiles[0].row &&
-      (obj.col === tiles[0].col + 1 || obj.col === tiles[0].col - 1)
+      obj.row === tiles[zero].row &&
+      (obj.col === tiles[zero].col + 1 || obj.col === tiles[zero].col - 1)
     ) {
       // alert("this tile is in the same row!");
       temp = tiles[index].col;
-      newTiles[index].col = tiles[0].col;
-      newTiles[0].col = temp;
+      newTiles[index].col = tiles[zero].col;
+      newTiles[zero].col = temp;
       
       let temp2 = newTiles[index];
-      newTiles[index] = tiles[0];
-      newTiles[0] = temp2;
+      newTiles[index] = tiles[zero];
+      newTiles[zero] = temp2;
 
 
-      setTiles(newTiles);
+      setTiles([...tiles]);
 
       // setTiles(thistiles.col === tiles[0].col && make tiles[0].col === thistiles.col)
     } else {
